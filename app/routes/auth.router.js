@@ -57,7 +57,7 @@ router.get('/isAuth', (req, res) => {
             if (!user)
                 return res.status(401).json({ 'message': 'Unautherized' });
 
-            res.send(user);
+            res.json(user);
         })
         .catch((err) => {
             console.log(`auth/isAuth\n${err}`);

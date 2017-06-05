@@ -6,7 +6,8 @@ var config = {
 
     entry: {
         bundle: './ts/main.ts',
-        vendor: './ts/vendor.ts'
+        vendor: './ts/vendor.ts',
+        polyfills: './ts/polyfills.ts'
     },
 
     output: {
@@ -38,7 +39,7 @@ var config = {
         }),
 
         new webpack.optimize.CommonsChunkPlugin({
-            name: ['bundle', 'vendor']
+            name: ['bundle', 'vendor', 'polyfills']
         })
     ]
 }

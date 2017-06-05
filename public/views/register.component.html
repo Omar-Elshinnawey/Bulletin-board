@@ -1,0 +1,10 @@
+<div class="register-form-container">
+    <form (ngSubmit)="onsubmit()" #registerForm="ngForm">
+        <div>
+            <md-input-container>
+                <input mdInput type="text" placeholder="nickname" name="nickname" [(ngModel)]="nickname">
+            </md-input-container>
+        </div>
+        <button md-raised-button color="primary" type="submit">Register</button>
+    </form>
+</div>

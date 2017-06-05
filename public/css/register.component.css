@@ -1,0 +1,8 @@
+.register-form-container {
+    display: flex;
+    height: 100vh;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}

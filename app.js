@@ -36,9 +36,9 @@ app.use(bodyParser.json());
 app.use('/assets', express.static(path.resolve(__dirname, './public')));
 
 /**routes */
-app.use('/auth', require('./app/routes/auth.router'));
-app.use('/groups', isAuthenticated, require('./app/routes/group.router'));
-app.use('/notes', isAuthenticated, require('./app/routes/note.router'));
+app.use('/api/auth', require('./app/routes/auth.router'));
+app.use('/api/groups', isAuthenticated, require('./app/routes/group.router'));
+app.use('/api/notes', isAuthenticated, require('./app/routes/note.router'));
 app.use('*', (req, res) => {
     res.sendFile(path.resolve(__dirname, './public/index.html'));
 });
