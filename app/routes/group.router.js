@@ -18,7 +18,7 @@ router.post('/create', (req, res) => {
             return User.findOneAndUpdate({ token: req.headers.token }, { group: group._id });
         })
         .then((user) => {
-            res.json({ 'message': 'group created successfully' });
+            res.json({ 'message': 'group created successfully', 'groupId': group._id });
         })
         .catch((err) => {
             console.log(`groups/create\n${err}`);
