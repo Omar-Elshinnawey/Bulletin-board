@@ -10,7 +10,7 @@ import 'hammerjs';
 import {MaterialModule} from '@angular/material';
 import { AppComponent, RegisterComponent, GroupComponent } from '../components';
 
-import {RegisterService, ToastService, GroupService} from '../services';
+import {RegisterService, ToastService, GroupService, IOService} from '../services';
 
 @NgModule({
     imports: [BrowserModule,
@@ -28,6 +28,7 @@ import {RegisterService, ToastService, GroupService} from '../services';
     bootstrap:[AppComponent],
     providers: [RegisterService,
                 GroupService,
-                ToastService],
+                ToastService,
+                IOService],
 })
 export class AppModule { }

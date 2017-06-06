@@ -19,7 +19,7 @@ export class GroupService {
         .map((res: Response) => {
             return res.json() as Group[]
         })
-        .catch(this.handleError);
+        .catch(this.handleError.bind(this));
     }
 
     create(name: string): Observable<string>{
@@ -33,7 +33,7 @@ export class GroupService {
 
             return res.json().message;
         })
-        .catch(this.handleError);
+        .catch(this.handleError.bind(this));
     }
 
     join(id: string): Observable<string>{
@@ -47,7 +47,7 @@ export class GroupService {
 
             return res.json().message;
         })
-        .catch(this.handleError);
+        .catch(this.handleError.bind(this));
     }
 
     getReqOptionsWithToken(): RequestOptions{

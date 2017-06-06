@@ -37,7 +37,7 @@ app.use('/assets', express.static(path.resolve(__dirname, './public')));
 
 /**routes */
 app.use('/api/auth', require('./app/routes/auth.router'));
-app.use('/api/groups', isAuthenticated, require('./app/routes/group.router'));
+app.use('/api/groups', isAuthenticated, require('./app/routes/group.router')(io));
 app.use('/api/notes', isAuthenticated, require('./app/routes/note.router'));
 app.use('*', (req, res) => {
     res.sendFile(path.resolve(__dirname, './public/index.html'));

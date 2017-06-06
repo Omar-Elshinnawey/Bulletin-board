@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import {Group} from '../models';
 
-import {GroupService, ToastService} from '../services';
+import {GroupService, ToastService, IOService} from '../services';
 
 import {Subscription} from 'rxjs/Subscription';
 
@@ -17,7 +17,7 @@ export class GroupComponent implements OnInit {
     subs: Subscription[];
     groupName:string;
 
-    constructor(private groupService: GroupService, public toast: ToastService) {
+    constructor(private groupService: GroupService, public toast: ToastService, public io: IOService) {
         this.subs = new Array();
      }
 
@@ -27,6 +27,10 @@ export class GroupComponent implements OnInit {
             (groups) => { this.groups = groups },
             (err) => { this.toast.error(err) }
         );
+
+        this.subs.push(sub);
+
+        sub = this.io.ongroupcreated().subscribe((group) => {this.groups.push(group)});
 
         this.subs.push(sub);
     }
