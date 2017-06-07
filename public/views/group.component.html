@@ -1,17 +1,36 @@
-<div>
-    <h1>Groups</h1>
-    <ul>
-        <li *ngFor="let group of groups">{{group.name}}</li>
-    </ul>
+<div class="groups-container" *ngIf="showGroups" [@showState]="showGroups">
+    <md-card color="accent">
+        <md-card-header>
+            <md-card-title>
+                <h2>Groups</h2>
+            </md-card-title>
+        </md-card-header>
+
+        <md-card-content>
+            <md-list>
+                <md-list-item *ngFor="let group of groups">{{group.name}}</md-list-item>
+                <md-list-item *ngIf="!groups || groups.length === 0">Currently no groups</md-list-item>
+            </md-list>
+        </md-card-content>
+    </md-card>
 </div>
 
-<div>
-    <h3>Create new</h3>
+<div class="groups-container" *ngIf="!showGroups" [@showState]="!showGroups">
+    <div class="groups-form">
+        <h3>Create new</h3>
 
-    <form (ngSubmit)="onsubmit()" #groupForm="ngForm">
-        <div>
-            <input type="text" name="group" [(ngModel)]="groupName">
-        </div>
-        <button type="submit">Create</button>
-    </form>
+        <form (ngSubmit)="onsubmit()" #groupForm="ngForm">
+            <div>
+                <md-input-container>
+                    <input mdInput type="text" name="group" [(ngModel)]="groupName" placeholder="group name">
+                </md-input-container>
+            </div>
+            <button md-raised-button color="primary" type="submit">Create</button>
+            <button md-raised-button color="warn" type="button" (click)="toggleState()">Cancel</button>
+        </form>
+    </div>
+</div>
+
+<div class="create-btn">
+    <button type="button" md-fab (click)="toggleState()"><md-icon>add</md-icon></button>
 </div>

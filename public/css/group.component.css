@@ -1,0 +1,30 @@
+.groups-container {
+    width: 96%;
+    height: 70%;
+    margin: 5px auto;
+    position: fixed;
+    top: 15%;
+    bottom: 15%;
+    left: 0;
+    right: 0;
+    overflow-y: auto;
+}
+
+.create-btn {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    margin: 20px 30px;
+}
+
+.groups-form {
+    position: fixed;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+@media (min-width: 961px) {
+    .groups-container {
+        width: 50%;
+    }
+}
