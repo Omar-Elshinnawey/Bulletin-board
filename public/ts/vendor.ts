@@ -9,6 +9,7 @@ import '@angular/material';
 import '@angular/animations';
 
 import 'rxjs/Observable';
+import 'rxjs/add/observable/fromEvent';
 import 'rxjs/add/observable/throw';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';

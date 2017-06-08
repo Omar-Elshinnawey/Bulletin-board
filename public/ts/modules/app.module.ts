@@ -8,9 +8,9 @@ import {ToastrModule} from 'ngx-toastr';
 import {AppRoutingModule} from './app-routing.module';
 import 'hammerjs';
 import {MaterialModule} from '@angular/material';
-import { AppComponent, RegisterComponent, GroupComponent } from '../components';
+import { AppComponent, RegisterComponent, GroupComponent, NotesComponent } from '../components';
 
-import {RegisterService, ToastService, GroupService, IOService} from '../services';
+import {RegisterService, ToastService, GroupService, IOService, NotesService} from '../services';
 
 @NgModule({
     imports: [BrowserModule,
@@ -21,14 +21,15 @@ import {RegisterService, ToastService, GroupService, IOService} from '../service
                 ToastrModule.forRoot(),
                 AppRoutingModule,
                 MaterialModule],
-    exports: [],
     declarations: [AppComponent,
                     RegisterComponent,
-                    GroupComponent],
+                    GroupComponent,
+                    NotesComponent],
     bootstrap:[AppComponent],
     providers: [RegisterService,
                 GroupService,
                 ToastService,
-                IOService],
+                IOService,
+                NotesService],
 })
 export class AppModule { }

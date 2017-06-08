@@ -1,43 +1,43 @@
 {
-  "name": "real-time-notes",
-  "version": "0.0.1",
-  "description": "real time application",
-  "main": "app.js",
-  "scripts": {
-    "build": "webpack --w"
-  },
-  "author": "Omar Elshinnawey",
-  "license": "ISC",
-  "dependencies": {
-    "@angular/animations": "^4.1.3",
-    "@angular/common": "^4.1.3",
-    "@angular/compiler": "^4.1.3",
-    "@angular/core": "^4.1.3",
-    "@angular/forms": "^4.1.3",
-    "@angular/http": "^4.1.3",
-    "@angular/material": "^2.0.0-beta.6",
-    "@angular/platform-browser": "^4.1.3",
-    "@angular/platform-browser-dynamic": "^4.1.3",
-    "@angular/router": "^4.1.3",
-    "@angular/upgrade": "^4.1.3",
-    "@types/socket.io-client": "^1.4.29",
-    "bluebird": "^3.5.0",
-    "body-parser": "^1.17.2",
-    "core-js": "^2.4.1",
-    "express": "^4.15.3",
-    "hammerjs": "^2.0.8",
-    "jsonwebtoken": "^7.4.1",
-    "mongoose": "^4.10.4",
-    "ngx-toastr": "^5.2.4",
-    "reflect-metadata": "^0.1.10",
-    "rxjs": "^5.4.0",
-    "socket.io": "^2.0.2",
-    "socket.io-client": "^2.0.2",
-    "zone.js": "^0.8.11"
-  },
-  "devDependencies": {
-    "awesome-typescript-loader": "^3.1.3",
-    "typescript": "^2.3.4",
-    "webpack": "^2.6.1"
-  }
+    "name": "real-time-notes",
+    "version": "0.0.1",
+    "description": "real time application",
+    "main": "app.js",
+    "scripts": {
+        "build": "webpack --w"
+    },
+    "author": "Omar Elshinnawey",
+    "license": "ISC",
+    "dependencies": {
+        "@angular/animations": "^4.1.3",
+        "@angular/common": "^4.1.3",
+        "@angular/compiler": "^4.1.3",
+        "@angular/core": "^4.1.3",
+        "@angular/forms": "^4.1.3",
+        "@angular/http": "^4.1.3",
+        "@angular/material": "^2.0.0-beta.6",
+        "@angular/platform-browser": "^4.1.3",
+        "@angular/platform-browser-dynamic": "^4.1.3",
+        "@angular/router": "^4.1.3",
+        "@angular/upgrade": "^4.1.3",
+        "@types/socket.io-client": "^1.4.29",
+        "bluebird": "^3.5.0",
+        "body-parser": "^1.17.2",
+        "core-js": "^2.4.1",
+        "express": "^4.15.3",
+        "hammerjs": "^2.0.8",
+        "jsonwebtoken": "^7.4.1",
+        "mongoose": "^4.10.5",
+        "ngx-toastr": "^5.2.4",
+        "reflect-metadata": "^0.1.10",
+        "rxjs": "^5.4.0",
+        "socket.io": "^2.0.2",
+        "socket.io-client": "^2.0.2",
+        "zone.js": "^0.8.12"
+    },
+    "devDependencies": {
+        "awesome-typescript-loader": "^3.1.3",
+        "typescript": "^2.3.4",
+        "webpack": "^2.6.1"
+    }
 }

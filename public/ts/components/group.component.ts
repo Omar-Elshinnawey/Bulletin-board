@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {trigger, state, style, animate, transition, group} from '@angular/animations';
+import {trigger, state, style, animate, transition} from '@angular/animations';
+import {Router} from '@angular/router';
 
-import {Group} from '../models';
+import {Group, User} from '../models';
 
 import {GroupService, ToastService, IOService} from '../services';
 
@@ -36,11 +37,21 @@ export class GroupComponent implements OnInit {
     groupName:string;
     showGroups = true;
 
-    constructor(private groupService: GroupService, public toast: ToastService, public io: IOService) {
+    constructor(private groupService: GroupService, 
+                public toast: ToastService, 
+                public io: IOService, 
+                private router: Router) {
         this.subs = new Array();
      }
 
     ngOnInit() {
+        var user = JSON.parse(localStorage.getItem('user')) as User;
+
+        if(user.group){
+            this.router.navigate(['notes']);
+            return;
+        }
+
         var sub = this.groupService.getGroups()
         .subscribe(
             (groups) => { this.groups = groups },
@@ -57,7 +68,10 @@ export class GroupComponent implements OnInit {
     onsubmit(){
         var sub = this.groupService.create(this.groupName)
         .subscribe(
-            (message) => {this.toast.success(message)},
+            (message) => {
+                this.toast.success(message);
+                this.router.navigate(['notes']);
+            },
             (err) => { this.toast.error(err) }
         );
 

@@ -1,0 +1,41 @@
+<div>
+    <div class="notes" *ngIf="showNotes" [@showNotes]="showNotes">
+        <h2>{{group.name}}</h2>
+
+        <div>
+            <div *ngIf="!group.notes || group.notes.length === 0; else notes">
+                <strong>No notes in this group</strong>
+            </div>
+
+            <ng-template #notes>
+                <div *ngFor="let note of group.notes">
+                    <h3>{{note.title}}</h3>
+                    <p>
+                        {{note.text}}
+                    </p>
+                </div>
+            </ng-template>
+        </div>
+
+    </div>
+    <div class="notes-form" *ngIf="!showNotes" [@showNotes]="!showNotes">
+        <form (ngSubmit)="create()" #notesForm="ngForm">
+            <div>
+                <md-input-container>
+                    <input mdInput type="text" name="title" placeholder="title" [(ngModel)]="note.title">
+                </md-input-container>
+            </div>
+
+            <div>
+                <md-input-container>
+                    <textarea mdInput placeholder="text" type="text" name="text" [(ngModel)]="note.text"></textarea>
+                </md-input-container>
+            </div>
+            <button type="submit" md-raised-button color="primary">Create</button>
+            <button type="button" md-raised-button color="warn" (click)="toggleState()">Cancel</button>
+        </form>
+    </div>
+</div>
+<div class="create-btn">
+    <button type="button" md-fab (click)="toggleState()"><md-icon>add</md-icon></button>
+</div>
