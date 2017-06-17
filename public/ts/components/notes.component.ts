@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {trigger, style, state, transition, animate} from '@angular/animations';
 import {Router} from '@angular/router';
 
-import {NotesService, ToastService} from '../services';
+import {NotesService, ToastService, RegisterService} from '../services';
 import {Group, Note} from '../models';
 
 import {Subscription} from 'rxjs/Subscription';
@@ -36,7 +36,10 @@ export class NotesComponent implements OnInit {
     note: Note;
     showNotes = true;
 
-    constructor(private notesService: NotesService, private router: Router, private toast: ToastService) { 
+    constructor(private notesService: NotesService, 
+                private router: Router, 
+                private toast: ToastService,
+                public registerService: RegisterService) { 
         this.subs = new Array();
         this.note = new Note();
         this.group = new Group();
@@ -52,7 +55,10 @@ export class NotesComponent implements OnInit {
 
         var sub = this.notesService.getNotes()
         .subscribe(
-            (group) => {this.group = group},
+            (group) => {
+                this.group = group
+                this.group.notes.forEach(note => note.color = this.getRandColor());
+            },
             (err: string) => {this.toast.error(err)}
         );
 
@@ -75,5 +81,23 @@ export class NotesComponent implements OnInit {
 
     ngOnDestroy(){
          this.subs.forEach((sub) => sub.unsubscribe());
+    }
+
+    getRandColor(){
+        var colors = [  '#63CCEC', '#FFE339', '#FBAD6B',
+                        '#F9666E', '#F7A9C3', '#C197C7', 
+                        '#3C9BD5', '#CFE38C', '#10B1AC',
+                        '#E7523C', '#E75335', '#FAB8A2' ];
+
+        return colors[Math.floor(Math.random() * colors.length)];
+    }
+
+    logout(){
+        this.registerService.logout().
+        toPromise()
+        .then(res => {
+            this.router.navigate(['register']);
+        })
+        .catch(message => this.toast.error(message));
     }
 }
