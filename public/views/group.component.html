@@ -8,7 +8,7 @@
 
         <md-card-content>
             <md-list>
-                <md-list-item *ngFor="let group of groups">{{group.name}}</md-list-item>
+                <md-list-item *ngFor="let group of groups" (click)="join(group)">{{group.name}}</md-list-item>
                 <md-list-item *ngIf="!groups || groups.length === 0">Currently no groups</md-list-item>
             </md-list>
         </md-card-content>

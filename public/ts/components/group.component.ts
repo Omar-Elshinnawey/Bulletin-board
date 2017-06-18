@@ -63,6 +63,14 @@ export class GroupComponent implements OnInit {
         sub = this.io.ongroupcreated().subscribe((group) => {this.groups.push(group)});
 
         this.subs.push(sub);
+
+        sub = this.io.ongroupdeleted().subscribe((group) => {
+            var index = this.groups.findIndex(e => e._id === group._id);
+
+            this.groups.splice(index, 1);
+        });
+
+        this.subs.push(sub);
     }
 
     onsubmit(){
@@ -73,6 +81,23 @@ export class GroupComponent implements OnInit {
                 this.router.navigate(['notes']);
             },
             (err) => { this.toast.error(err) }
+        );
+
+        this.subs.push(sub);
+    }
+
+    join(group: Group){
+        var sub = this.groupService.join(group._id)
+        .subscribe(
+            (message) => {
+                var nickname = (JSON.parse(localStorage.getItem('user')) as User).nickname;
+                
+                this.toast.success(message);
+                this.router.navigate(['notes']);
+            },
+            (error) => {
+                this.toast.error(error);
+            }
         );
 
         this.subs.push(sub);

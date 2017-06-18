@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import {trigger, style, state, transition, animate} from '@angular/animations';
 import {Router} from '@angular/router';
 
-import {NotesService, ToastService, RegisterService} from '../services';
-import {Group, Note} from '../models';
+import {NotesService, ToastService, RegisterService, IOService} from '../services';
+import {Group, Note, User} from '../models';
 
 import {Subscription} from 'rxjs/Subscription';
 
@@ -30,7 +30,8 @@ import {Subscription} from 'rxjs/Subscription';
 })
 
 export class NotesComponent implements OnInit {
-
+    
+    @ViewChild('notesForm') notesForm: HTMLFormElement;
     private subs: Subscription[];
     group: Group;
     note: Note;
@@ -39,7 +40,8 @@ export class NotesComponent implements OnInit {
     constructor(private notesService: NotesService, 
                 private router: Router, 
                 private toast: ToastService,
-                public registerService: RegisterService) { 
+                public registerService: RegisterService,
+                public io: IOService) { 
         this.subs = new Array();
         this.note = new Note();
         this.group = new Group();
@@ -63,12 +65,30 @@ export class NotesComponent implements OnInit {
         );
 
         this.subs.push(sub);
+
+        sub = this.io.onnotecreated().subscribe((note) => {
+            note.color = this.getRandColor();
+            this.group.notes.push(note);
+        });
+
+        this.subs.push(sub);
+
+        sub = this.io.onjoin().subscribe((nickname) => { this.toast.info(`${nickname} joined the group.`) });
+
+        this.subs.push(sub);
+
+        sub = this.io.onleft().subscribe((nickname) => {this.toast.info(`${nickname} left the group.`)});
+
+        this.subs.push(sub);
     }
 
     create(){
         var sub = this.notesService.create(this.note.title, this.note.text)
         .subscribe(
-            (message) => {this.toast.success(message)},
+            (message) => {
+                this.toast.success(message);
+                this.notesForm.reset();
+            },
             (err: string) => {this.toast.error(err)}
         );
 
@@ -96,6 +116,9 @@ export class NotesComponent implements OnInit {
         this.registerService.logout().
         toPromise()
         .then(res => {
+            var user = JSON.parse(localStorage.getItem('user')) as User;
+            this.io.leave(user.group, user.nickname);
+
             this.router.navigate(['register']);
         })
         .catch(message => this.toast.error(message));

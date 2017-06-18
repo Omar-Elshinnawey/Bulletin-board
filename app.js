@@ -36,12 +36,14 @@ app.use(bodyParser.json());
 app.use('/assets', express.static(path.resolve(__dirname, './public')));
 
 /**routes */
-app.use('/api/auth', require('./app/routes/auth.router'));
+app.use('/api/auth', require('./app/routes/auth.router')(io));
 app.use('/api/groups', isAuthenticated, require('./app/routes/group.router')(io));
-app.use('/api/notes', isAuthenticated, require('./app/routes/note.router'));
+app.use('/api/notes', isAuthenticated, require('./app/routes/note.router')(io));
 app.use('*', (req, res) => {
     res.sendFile(path.resolve(__dirname, './public/index.html'));
 });
+
+require('./app/routes/io.router')(io);
 
 /**mongoose */
 mongoose.Promise = require('bluebird');

@@ -9,12 +9,14 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/toPromise';
 
+import {IOService} from './io.service';
+
 import {User} from '../models';
 
 @Injectable()
 export class RegisterService implements CanActivate {
 
-    constructor(private http: Http, private router: Router) { }
+    constructor(private http: Http, private router: Router, public io: IOService) { }
 
     register(nickname: string){
         var headers = this.setHeaders();
@@ -72,6 +74,10 @@ export class RegisterService implements CanActivate {
         .toPromise()
         .then((user: User) => {
             localStorage.setItem('user', JSON.stringify(user));
+            
+            if(user.group)
+                this.io.join(user.group, user.nickname);
+
             return true;
         })
         .catch((message: string) => {
