@@ -25,7 +25,7 @@ export class NotesService {
         .map((res: Response) => {
             return res.json().message;
         })
-        .catch(this.handleError.bind(this));
+        .catch((err) => this.handleError(err));
     }
 
     getNotes(): Observable<Group>{
@@ -37,7 +37,7 @@ export class NotesService {
             group.notes = group.notes as Note[];
             return group;
         })
-        .catch(this.handleError.bind(this));
+        .catch((err) => this.handleError(err));
     }
 
     handleError(res: Response){
